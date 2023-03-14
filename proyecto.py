@@ -64,38 +64,31 @@ if agree2:
     st.text("Este histograma muestra el total de los juegos con su diferente clasificacion")
     st.markdown("___")
 
-fig2, ax2 = plt.subplots()
-data = load_data(10)
-y_pos = data['Rating']
-x_pos = data['Publisher']
-ax2.barh(y_pos, x_pos)
-ax2.set_ylabel("NA_Sales")
-ax2.set_xlabel("EU_Sales")
-ax2.set_title('')
-st.header("Grafica de Barras del Titanic")
-st.pyplot(fig2)
+agree3 = sidebar.checkbox("Mostrar grafica de barras de clasificacion")
+if agree3:
+    fig2, ax2 = plt.subplots()
+    data = load_data(50)
+    y_pos = data['Publisher']
+    x_pos = data['Rating']
+    ax2.barh(y_pos, x_pos)
+    plt.xticks(rotation=90)
+    ax2.set_ylabel("Publisher")
+    ax2.set_xlabel("Rating")
+    ax2.set_title('')
+    st.header("Grafica de Barras de para representar la clasificacion de desarrollo")
+    st.pyplot(fig2)
+    st.caption("Esta grafica representa hasta que clasificacion de videojuegos las compañias desarrollan estos mismos")
 
-
-df = pd.read_csv('dato.csv')
-
-# Step 3: Filter data by company
-company_name = 'Nintendo' # Replace with desired company name
-df_filtered = df.loc[df['Publisher'] == company_name]
-
-# Step 4: Create scatter plot
-plt.scatter(df_filtered['Publisher'], df_filtered['Global_Sales'])
-
-# Step 5: Add labels to plot
-plt.xlabel('Column 1')
-plt.ylabel('Column 2')
-
-# Step 6: Add title to plot
-plt.title('Scatter plot of {} data'.format(company_name))
-
-# Step 7: Display plot
-st.pyplot(plt)
-
-
+agree4 = sidebar.checkbox("Mostrar grafica de scatter de clasificacion")
+if agree4:
+    fig3, ax3 = plt.subplots()
+    data = load_data(500)
+    ax3.scatter(data.Critic_Score_Class, data.Rating)
+    ax3.set_xlabel("Puntaje")
+    ax3.set_ylabel("Clasificacion")
+    st.header("Grafica de Dispersión VideoGames Sales")
+    st.caption("Esta grafica representa, que califiacion tienen las diferentes clasificaciones de los videojuegos")
+    st.pyplot(fig3)
 
 
 
